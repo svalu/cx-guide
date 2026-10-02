@@ -24,6 +24,7 @@
   </style>
   <link rel="stylesheet" href="field-guide-readability.css">
   <link rel="stylesheet" href="field-guide-journey.css">
+  <link rel="stylesheet" href="field-guide-scenario.css">
 </head>
 <body>
   <header class="topbar"><div class="wrap"><a class="brand" href="#top">FIELD NOTES / CX</a><nav class="topnav" aria-label="페이지 이동"><a href="#basics">개념</a><a href="#journey">사용 위치</a><a href="#companies">회사 지도</a><a href="#practice">비교 관찰</a><a href="#glossary">용어집</a></nav></div></header>
@@ -114,24 +115,56 @@
       <div class="callout"><b>연결 지점</b><span>“고객이 다시 연락했을 때 상담원이 이전 문제를 바로 알아볼 수 있을까?” 이 질문 하나로 CCaaS와 CRM의 연결 UX를 평가할 수 있어.</span></div>
     </section>
 
-    <section id="glossary" aria-labelledby="terms-title"><div class="section-head"><div><div class="section-kicker">05 / QUICK WORDS</div><h2 id="terms-title">자주 나오는 용어</h2></div></div><p class="glossary-note">점선 밑줄이 있는 단어는 마우스를 올려 봐. 키보드로 선택하거나 모바일에서 눌러도 짧은 설명이 나와.</p><div class="glossary">
+    <section id="glossary" aria-labelledby="terms-title">
+      <div class="section-head"><div><div class="section-kicker">05 / LEARN BY SCENE</div><h2 id="terms-title">용어를 외우기보다, 상황을 따라가 봐</h2></div><p>고객이 배송 문제로 채팅한 뒤, 다음 날 전화하는 상황이야. 단계를 누르면 바로 아래 장면과 관련 용어가 바뀌어.</p></div>
+      <p class="scene-notice">가상의 학습 예시야. AIR Connect의 현재 연동 상태를 보여주는 화면은 아니야.</p>
+      <div class="scene-steps" role="group" aria-label="배송 문의의 다섯 장면">
+        <button type="button" class="scene-step active" data-scene="1" aria-pressed="true" aria-controls="scene-panel-1"><span class="scene-step-icon" aria-hidden="true">💬</span><span><small>01 · 고객</small><strong>채팅으로 문의</strong></span></button>
+        <button type="button" class="scene-step" data-scene="2" aria-pressed="false" aria-controls="scene-panel-2"><span class="scene-step-icon" aria-hidden="true">↪</span><span><small>02 · 연결</small><strong>담당자 찾기</strong></span></button>
+        <button type="button" class="scene-step" data-scene="3" aria-pressed="false" aria-controls="scene-panel-3"><span class="scene-step-icon" aria-hidden="true">🖥</span><span><small>03 · 상담</small><strong>맥락 확인</strong></span></button>
+        <button type="button" class="scene-step" data-scene="4" aria-pressed="false" aria-controls="scene-panel-4"><span class="scene-step-icon" aria-hidden="true">▤</span><span><small>04 · 처리</small><strong>할 일 남기기</strong></span></button>
+        <button type="button" class="scene-step" data-scene="5" aria-pressed="false" aria-controls="scene-panel-5"><span class="scene-step-icon" aria-hidden="true">↺</span><span><small>05 · 재문의</small><strong>전화로 다시 연락</strong></span></button>
+      </div>
+      <div class="scene-stage" aria-live="polite">
+        <article class="scene-panel" id="scene-panel-1" data-scene-panel="1"><div class="scene-visual"><div class="scene-window"><div class="scene-window-head"><span>배송 문의 채팅</span><span class="scene-status">대화 시작</span></div><div class="scene-chat customer">주문한 상품이 아직 안 왔어요.</div><div class="scene-chat agent">확인해 볼게요. 주문번호를 알려주시겠어요?</div></div></div><div class="scene-copy"><span class="scene-copy-kicker">고객이 처음 연락한 순간</span><h3>채팅 한 번이 ‘컨택 한 건’이야</h3><p>채팅은 고객이 선택한 <b>채널</b>이고, 이 대화 한 번은 <b>컨택</b>으로 볼 수 있어. 같은 고객이 나중에 전화하면 새로운 컨택이 생겨.</p><div class="scene-terms"><button class="term-tip" type="button" data-term="channel">채널 ↗</button><button class="term-tip" type="button" data-term="contact">컨택 ↗</button><button class="term-tip" type="button" data-term="multi">멀티채널 ↗</button></div></div></article>
+        <article class="scene-panel" id="scene-panel-2" data-scene-panel="2" hidden><div class="scene-visual"><div class="scene-route"><span>고객 문의</span><b aria-hidden="true">→</b><span>배송 문의 대기열</span><b aria-hidden="true">→</b><span>가능한 상담원</span></div><p class="scene-visual-note">전화라면 앞에서 “배송 문의는 1번” 같은 자동 안내를 거칠 수도 있어.</p></div><div class="scene-copy"><span class="scene-copy-kicker">누가 받을지 정하는 순간</span><h3>문의가 큐를 거쳐 상담원에게 가</h3><p><b>큐</b>는 연락이 기다리는 곳이고, <b>라우팅</b>은 어느 상담원에게 보낼지 정하는 흐름이야. <b>IVR</b>은 전화 고객의 선택을 먼저 받을 때 쓰여.</p><div class="scene-terms"><button class="term-tip" type="button" data-term="queue">큐 ↗</button><button class="term-tip" type="button" data-term="routing">라우팅 ↗</button><button class="term-tip" type="button" data-term="ivr">IVR ↗</button></div></div></article>
+        <article class="scene-panel" id="scene-panel-3" data-scene-panel="3" hidden><div class="scene-visual"><div class="scene-window"><div class="scene-window-head"><span>상담원 화면</span><span class="scene-status">상담 중</span></div><div class="scene-customer"><span class="scene-avatar" aria-hidden="true">고</span><div><b>고객 정보</b><small>어제 채팅 · 배송 지연 문의</small></div></div><div class="scene-context">현재 주문 상태 · 확인할 정보</div></div></div><div class="scene-copy"><span class="scene-copy-kicker">상담원이 정보를 보는 순간</span><h3>고객 정보가 보여야 다시 묻지 않아</h3><p><b>고객 프로필</b>은 같은 고객의 정보를 묶은 기록이야. 연락이 들어올 때 관련 정보를 띄우는 동작을 <b>스크린 팝</b>이라고 해.</p><div class="scene-terms"><button class="term-tip" type="button" data-term="profile">고객 프로필 ↗</button><button class="term-tip" type="button" data-term="screenpop">스크린 팝 ↗</button><button class="term-tip" type="button" data-term="workspace">상담원 화면 ↗</button></div></div></article>
+        <article class="scene-panel" id="scene-panel-4" data-scene-panel="4" hidden><div class="scene-visual"><div class="scene-ticket"><div><small>배송 확인 요청</small><strong>물류팀 답변 기다리는 중</strong></div><span>처리 중</span></div><div class="scene-task-flow"><span>상담 종료</span><b aria-hidden="true">→</b><span>메모·분류</span><b aria-hidden="true">→</b><span>후속 담당자</span></div></div><div class="scene-copy"><span class="scene-copy-kicker">상담 후에도 일이 남는 순간</span><h3>문제가 해결될 때까지 업무를 이어가</h3><p><b>티켓·케이스</b>는 해결할 문제와 처리 상태를 묶는 기록이야. 상담원이 대화 뒤에 내용을 정리하는 단계는 <b>후처리(ACW)</b>라고 해.</p><div class="scene-terms"><button class="term-tip" type="button" data-term="ticket">티켓 ↗</button><button class="term-tip" type="button" data-term="case">케이스 ↗</button><button class="term-tip" type="button" data-term="acw">후처리 ↗</button></div></div></article>
+        <article class="scene-panel" id="scene-panel-5" data-scene-panel="5" hidden><div class="scene-visual"><div class="scene-contrast"><div><small>연락 창구만 여러 개</small><b>“처음부터 다시 말씀해 주세요.”</b><span>채팅 기록과 전화 상담이 이어지지 않음</span></div><div class="connected"><small>고객 맥락까지 연결</small><b>“어제 배송 문의 주셨죠?”</b><span>이전 대화와 진행 상태를 함께 확인</span></div></div></div><div class="scene-copy"><span class="scene-copy-kicker">다음 날 전화가 온 순간</span><h3>이때 옴니채널의 차이가 보여</h3><p>전화와 채팅이 모두 있으면 <b>멀티채널</b>이야. 채널이 바뀌어도 같은 고객의 이전 대화와 업무 상태가 이어지면 <b>옴니채널</b> 경험이 돼.</p><div class="scene-terms"><button class="term-tip" type="button" data-term="multi">멀티채널 ↗</button><button class="term-tip" type="button" data-term="omni">옴니채널 ↗</button><button class="term-tip" type="button" data-term="integration">연동 ↗</button></div></div></article>
+      </div>
+      <details class="terms-library"><summary><span><b>전체 용어 30개 보기</b><small>필요할 때 찾아보는 참고 카드 · 누르면 펼쳐져</small></span><span class="terms-library-arrow" aria-hidden="true">⌄</span></summary><p class="glossary-note">점선 밑줄이 있는 용어에 마우스를 올리거나, 키보드·모바일에서 누르면 설명이 나와.</p><div class="glossary">
       <div class="term"><b><button class="term-tip" type="button" data-term="ccaas">CCaaS</button></b><span>클라우드에서 제공하는 컨택센터 서비스.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="crm">CRM</button></b><span>고객 정보와 관계·업무 이력을 관리하는 체계.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="saas">SaaS</button></b><span>인터넷으로 사용하는 소프트웨어 서비스 방식.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="channel">Channel · 채널</button></b><span>고객이 연락하는 경로. 전화·채팅·이메일 등이 있어.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="contact">Contact · 컨택</button></b><span>고객의 전화·채팅 등 한 번의 연락 또는 상호작용.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="ivr">IVR</button></b><span>고객을 안내하고 입력을 받는 자동 응답 흐름.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="acd">ACD</button></b><span>들어온 연락을 적절한 상담원에게 자동 배분하는 기능.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="queue">Queue · 큐</button></b><span>상담원 연결을 기다리는 연락이 모이는 대기열.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="routing">Routing · 라우팅</button></b><span>규칙에 따라 연락을 적절한 경로로 보내는 일.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="multi">Multichannel · 멀티채널</button></b><span>고객이 연락할 수 있는 채널을 여러 개 제공하는 것.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="omni">Omnichannel</button></b><span>여러 채널의 고객 대화를 이어서 다루는 방식.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="profile">고객 프로필</button></b><span>같은 고객의 정보와 연락 이력을 모아 보는 기록.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="workspace">상담원 워크스페이스</button></b><span>상담원이 연락·고객 정보·업무를 다루는 작업 화면.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="ccp">CCP · 연락 제어 패널</button></b><span>상담원이 전화·채팅을 받고 종료하는 조작 화면.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="cti">CTI</button></b><span>전화 시스템과 컴퓨터 업무 화면을 연결하는 기술.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="screenpop">Screen pop · 스크린 팝</button></b><span>연락이 오면 관련 고객 정보나 화면을 자동으로 띄우는 것.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="wem">WEM</button></b><span>상담원 일정·성과·품질 등을 관리하는 영역.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="sla">SLA</button></b><span>서비스 응답·처리 수준에 대한 약속 또는 목표.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="acw">ACW · 후처리</button></b><span>상담이 끝난 뒤 기록·분류·후속 조치를 하는 시간.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="ticket">Ticket · 티켓</button></b><span>고객 문의와 처리 과정을 묶는 지원 업무 기록.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="case">Case · 케이스</button></b><span>CRM에서 고객의 지원 이슈를 관리하는 업무 단위.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="integration">Integration · 연동</button></b><span>서로 다른 시스템의 정보나 동작을 이어주는 것.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="api">API</button></b><span>서로 다른 소프트웨어가 데이터를 주고받는 접점.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="kpi">KPI · 핵심 지표</button></b><span>운영 목표가 얼마나 달성됐는지 보는 주요 수치.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="aht">AHT · 평균 처리 시간</button></b><span>상담 한 건을 처리하는 데 평균적으로 걸린 시간.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="fcr">FCR · 첫 문의 해결률</button></b><span>고객의 첫 연락에서 문제가 해결된 비율.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="csat">CSAT · 고객 만족도</button></b><span>상담 후 고객이 평가한 만족 수준.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="stt">STT · 음성 전사</button></b><span>고객과 상담원의 말을 글자로 바꾸는 기술.</span></div>
+      <div class="term"><b><button class="term-tip" type="button" data-term="kb">Knowledge base · 지식 베이스</button></b><span>상담원이 답변 근거를 찾는 정책·FAQ 등의 자료 모음.</span></div>
       <div class="term"><b><button class="term-tip" type="button" data-term="quota">Quota · 할당량</button></b><span>서비스가 정한 요청·사용량 등의 한도.</span></div>
-    </div></section>
+      </div></details>
+    </section>
   </main>
   <footer class="footer"><div class="wrap"><p>학습용 지도 · 2026년 9월 30일 확인 · 제품명과 기능은 변경될 수 있어 각 공식 페이지를 기준으로 다시 확인해 줘.</p><p>이 페이지의 회사 분류와 제품 위치는 학습을 위한 해석이야. 실제 기능과 계약 조건은 각 제품의 공식 자료를 확인해 줘.</p></div></footer>
   <script src="field-guide-motion.js"></script>
@@ -140,18 +173,32 @@
       ccaas:'Contact Center as a Service. 전화·채팅 등 고객 연락 처리 기능을 클라우드 서비스로 제공하는 방식.',
       crm:'Customer Relationship Management. 고객 정보와 관계·상담·후속 업무를 관리하는 체계.',
       saas:'Software as a Service. 설치형 소프트웨어 대신 인터넷으로 이용하는 서비스 방식.',
+      channel:'고객이 연락하는 경로. 전화·채팅·이메일처럼 고객 접점의 종류를 뜻해.',
       contact:'고객의 전화·채팅 등 한 번의 연락 또는 상호작용. 제품마다 집계 단위는 다를 수 있어.',
       ivr:'Interactive Voice Response. 고객에게 안내를 들려주고 번호·음성 입력을 받는 자동 응답.',
       acd:'Automatic Call Distribution. 들어온 연락을 규칙에 따라 상담원에게 자동 배분하는 기능.',
       queue:'상담원 연결을 기다리는 고객 연락이 모이는 대기열.',
       routing:'채널·문의 유형·상담원 상태 같은 조건에 따라 연락의 경로를 정하는 일.',
-      omni:'Omnichannel. 전화·채팅·이메일 등 여러 채널의 대화를 이어서 다루는 방식.',
+      multi:'Multichannel. 전화·채팅처럼 고객이 선택할 수 있는 연락 창구가 여러 개인 상태. 채널 사이의 상담 맥락이 자동으로 이어진다는 뜻은 아니야.',
+      omni:'Omnichannel. 채널이 바뀌어도 같은 고객의 이전 대화와 처리 맥락을 이어서 다루는 방식.',
+      profile:'고객의 신원·연락처·이전 상담처럼 같은 고객에 관한 정보를 묶은 기록. 무엇을 저장하는지는 시스템마다 달라.',
+      workspace:'상담원이 연락을 받고 고객 정보를 확인하며 업무를 처리하는 작업 공간. 여러 도구가 한 화면에 모일 수 있어.',
+      ccp:'Contact Control Panel. 상담원이 들어온 연락을 받고, 보류·전환·종료 등을 조작하는 패널. Amazon Connect에서 쓰는 명칭이야.',
       cti:'Computer Telephony Integration. 전화 시스템과 상담원 컴퓨터 화면을 연결하는 기술.',
+      screenpop:'Screen pop. 전화나 채팅이 들어올 때 해당 고객의 정보 또는 관련 업무 화면을 자동으로 보여주는 동작.',
       wem:'Workforce Engagement Management. 상담원 일정·품질·성과·코칭을 관리하는 영역.',
       sla:'Service Level Agreement. 응답 시간·처리 수준 등에 대한 약속이나 목표.',
+      acw:'After Contact Work. 고객과의 대화가 끝난 뒤 상담 내용을 기록·분류하고 후속 조치를 정리하는 단계.',
       ticket:'고객 문의, 답변, 담당자, 처리 상태를 묶어 관리하는 지원 업무 기록.',
       case:'CRM에서 고객의 문제와 해결 과정을 관리하는 업무 기록 단위.',
+      integration:'서로 다른 제품이나 업무 시스템을 연결해 정보를 읽거나 작업 결과를 전달하는 것. 실제 가능한 범위는 연결 방식과 권한에 따라 달라.',
       api:'Application Programming Interface. 다른 소프트웨어와 기능·데이터를 연결하는 규칙.',
+      kpi:'Key Performance Indicator. 응답률·대기 시간처럼 운영 목표를 확인할 때 보는 핵심 수치.',
+      aht:'Average Handle Time. 통화·채팅 진행과 상담 후 처리 시간을 포함해 한 건을 처리하는 데 걸린 평균 시간. 집계 범위는 제품마다 확인해야 해.',
+      fcr:'First Contact Resolution. 같은 문제에 대한 재연락이나 이관 없이 첫 문의에서 해결된 비율. 무엇을 해결로 볼지는 조직마다 정해야 해.',
+      csat:'Customer Satisfaction. 상담 후 설문 등으로 확인한 고객 만족도. 응답한 고객을 기준으로 계산하는 경우가 많아.',
+      stt:'Speech to Text. 통화 음성을 문자로 바꾸는 기술. 상담 요약이나 검색에 활용할 수 있어.',
+      kb:'Knowledge base. 상담 답변에 참고하는 정책·FAQ·매뉴얼 등의 자료 모음. AI 답변의 근거로 연결하기도 해.',
       quota:'서비스가 정한 요청 횟수·동시 처리 수 등의 사용 한도. 증설 가능 여부는 항목마다 달라.'
     };
     const tooltip = document.createElement('div');
@@ -231,5 +278,6 @@
     search.addEventListener('input', applyFilter);
   </script>
   <script src="field-guide-journey.js"></script>
+  <script src="field-guide-scenario.js"></script>
 </body>
 </html>
