@@ -29,6 +29,7 @@
   const board = $('match-board'), clues = $('match-clues'), terms = $('match-terms'), lines = $('match-lines');
   const feedback = $('match-feedback'), next = $('match-next'), play = $('match-play'), done = $('match-done');
   let round = 0, selected = { clue: null, term: null }, matched = new Set(), locked = false;
+  let pinnedPair = null, baseFeedback = { message: '', type: '' };
 
   function shuffle(items) {
     const copy = [...items];
@@ -45,11 +46,29 @@
     button.dataset.matchId = String(id);
     button.textContent = label;
     button.addEventListener('click', () => choose(kind, button));
+    button.addEventListener('pointerenter', () => { if (matched.has(button.dataset.matchId)) showPair(button.dataset.matchId); });
+    button.addEventListener('pointerleave', () => showPair(pinnedPair));
+    button.addEventListener('focus', () => { if (matched.has(button.dataset.matchId)) showPair(button.dataset.matchId); });
+    button.addEventListener('blur', () => showPair(pinnedPair));
     return button;
   }
   function setFeedback(message, type = '') {
+    baseFeedback = { message, type };
     feedback.textContent = message;
     feedback.className = `match-feedback ${type}`;
+  }
+  function showPair(id) {
+    board.classList.toggle('inspect', id !== null);
+    board.querySelectorAll('.match-card.matched').forEach(card => card.classList.toggle('pair-active', card.dataset.matchId === id));
+    lines.querySelectorAll('path[data-match-id]').forEach(path => path.classList.toggle('pair-active', path.dataset.matchId === id));
+    if (id === null) {
+      feedback.textContent = baseFeedback.message;
+      feedback.className = `match-feedback ${baseFeedback.type}`;
+    } else {
+      const [term, clue] = rounds[round].pairs[Number(id)];
+      feedback.textContent = `연결 확인: ${term} ↔ ${clue}`;
+      feedback.className = 'match-feedback success';
+    }
   }
   function point(button, side) {
     const b = button.getBoundingClientRect(), c = board.getBoundingClientRect();
@@ -59,7 +78,8 @@
     const width = board.clientWidth, height = board.clientHeight;
     lines.setAttribute('viewBox', `0 0 ${width} ${height}`);
     lines.replaceChildren();
-    for (const id of matched) addLine(id, id, 'new');
+    for (const id of matched) addLine(id, id, '');
+    showPair(pinnedPair);
   }
   function addLine(clueId, termId, className) {
     const clue = clues.querySelector(`[data-match-id="${clueId}"]`);
@@ -70,6 +90,7 @@
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', `M ${start.x} ${start.y} C ${mid} ${start.y}, ${mid} ${end.y}, ${end.x} ${end.y}`);
     path.setAttribute('class', className);
+    if (clueId === termId && className !== 'wrong') path.dataset.matchId = String(clueId);
     lines.append(path);
     return path;
   }
@@ -84,7 +105,13 @@
     selected = { clue: null, term: null };
   }
   function choose(kind, button) {
-    if (locked || button.disabled) return;
+    if (locked) return;
+    if (matched.has(button.dataset.matchId)) {
+      pinnedPair = pinnedPair === button.dataset.matchId ? null : button.dataset.matchId;
+      showPair(pinnedPair);
+      return;
+    }
+    pinnedPair = null; showPair(null);
     if (selected[kind] === button) {
       button.classList.remove('selected'); selected[kind] = null; return;
     }
@@ -101,13 +128,14 @@
       clearSelection();
       matched.add(id);
       clue.classList.add('matched'); term.classList.add('matched');
-      clue.disabled = true; term.disabled = true;
+      clue.setAttribute('aria-label', `${clue.textContent} — 연결된 용어: ${term.textContent}`);
+      term.setAttribute('aria-label', `${term.textContent} — 연결된 상황: ${clue.textContent}`);
       addLine(id, id, 'new'); updateCount();
       if (matched.size === 5) {
         setFeedback('5개 모두 연결했어! 다음 묶음으로 가볼까?', 'success');
         next.textContent = round === rounds.length - 1 ? '결과 보기 →' : '다음 묶음 →';
         next.hidden = false;
-      } else setFeedback('맞았어! 다음 두 카드를 이어봐.', 'success');
+      } else setFeedback(`${term.textContent} ↔ ${clue.textContent} 맞았어!`, 'success');
     } else {
       locked = true;
       clue.classList.add('wrong'); term.classList.add('wrong');
@@ -120,7 +148,7 @@
     }
   }
   function render() {
-    matched = new Set(); selected = { clue: null, term: null }; locked = false;
+    matched = new Set(); selected = { clue: null, term: null }; locked = false; pinnedPair = null;
     $('match-round').textContent = `${String(round + 1).padStart(2, '0')} / 06 · ${rounds[round].title}`;
     clues.replaceChildren(...rounds[round].pairs.map(([term, clue], id) => card('clue', id, clue)));
     terms.replaceChildren(...shuffle(rounds[round].pairs.map(([term], id) => card('term', id, term))));
