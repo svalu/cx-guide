@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="field-guide-journey.css">
   <link rel="stylesheet" href="field-guide-scenario.css">
   <link rel="stylesheet" href="field-guide-game.css">
+  <link rel="stylesheet" href="field-guide-match.css">
 </head>
 <body>
   <header class="topbar"><div class="wrap"><a class="brand" href="#top">FIELD NOTES / CX</a><nav class="topnav" aria-label="페이지 이동"><a href="#basics">개념</a><a href="#journey">사용 위치</a><a href="#companies">회사 지도</a><a href="#practice">비교 관찰</a><a href="#glossary">용어집</a></nav></div></header>
@@ -199,6 +200,22 @@
           <div class="game-result-actions"><button type="button" id="game-retry">다시 풀기</button><button type="button" id="game-next-level">다음 주제 →</button><button type="button" id="game-home">주제 선택</button></div>
         </div>
       </div>
+      <a class="game-jump" href="#match-game">선 연결하기로도 연습해 보기 <span aria-hidden="true">↘</span></a>
+    </section>
+    <section id="match-game" aria-labelledby="match-title">
+      <div class="section-head"><div><div class="section-kicker">07 / CONNECT THE LINES</div><h2 id="match-title">상황과 용어를 선으로 이어봐</h2></div><p>왼쪽 상황 하나, 오른쪽 용어 하나를 차례로 눌러 연결해 봐. 틀려도 다시 이으면 돼. 전체 30개 용어를 5개씩 연습할 수 있어.</p></div>
+      <div class="match-shell">
+        <div id="match-play">
+          <div class="match-top"><span id="match-round"></span><strong id="match-count">0 / 5 연결</strong></div>
+          <div class="match-progress" role="progressbar" aria-label="현재 묶음 연결 진행률" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span id="match-progress-fill"></span></div>
+          <p class="match-instruction">상황을 누른 다음 알맞은 용어를 눌러봐. 용어부터 골라도 돼.</p>
+          <div class="match-labels" aria-hidden="true"><span>현장 상황</span><span>용어</span></div>
+          <div class="match-board" id="match-board"><div class="match-column" id="match-clues" role="group" aria-label="현장 상황"></div><svg id="match-lines" class="match-lines" aria-hidden="true"></svg><div class="match-column" id="match-terms" role="group" aria-label="용어"></div></div>
+          <p id="match-feedback" class="match-feedback" role="status" aria-live="polite">서로 어울리는 카드 두 장을 골라봐.</p>
+          <button type="button" id="match-next" class="match-next" hidden>다음 묶음 →</button>
+        </div>
+        <div id="match-done" class="match-done" hidden><span aria-hidden="true">✦</span><h3>30개 용어, 모두 연결했어!</h3><p>이제 용어가 실제 상황에서 어디에 쓰이는지 조금 더 보일 거야.</p><button type="button" id="match-restart">처음부터 다시 잇기</button></div>
+      </div>
     </section>
   </main>
   <footer class="footer"><div class="wrap"><p>학습용 지도 · 2026년 9월 30일 확인 · 제품명과 기능은 변경될 수 있어 각 공식 페이지를 기준으로 다시 확인해 줘.</p><p>이 페이지의 회사 분류와 제품 위치는 학습을 위한 해석이야. 실제 기능과 계약 조건은 각 제품의 공식 자료를 확인해 줘.</p></div></footer>
@@ -315,5 +332,6 @@
   <script src="field-guide-journey.js"></script>
   <script src="field-guide-scenario.js"></script>
   <script src="field-guide-game.js"></script>
+  <script src="field-guide-match.js"></script>
 </body>
 </html>
